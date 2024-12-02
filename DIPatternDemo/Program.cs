@@ -18,6 +18,29 @@ builder.Services.AddScoped<IEmployeeServices, EmployeeServices>();
 builder.Services.AddScoped<IStudentRepo,StudentRepo>();
 builder.Services.AddScoped<IStudentServices,StudentServices>();
 
+builder.Services.AddScoped<ICategoryRepo, CategoryRepo>();
+builder.Services.AddScoped<ICategoryServices, CategoryServices>();
+
+builder.Services.AddScoped<IProductRepo, ProductRepo>();
+builder.Services.AddScoped<IProductServices, ProductServices>();
+
+builder.Services.AddScoped<IRegistrationRepo, RegistrationRepo>();
+builder.Services.AddScoped<IRegistrationServices, RegistrationServices>();
+
+
+//for cookies
+//builder.Services.AddHttpContextAccessor();
+builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+
+
+//configuration of session
+builder.Services.AddSession(options =>
+{
+    options.IdleTimeout = TimeSpan.FromMinutes(5);
+    options.Cookie.IsEssential = true;
+});
+
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -30,6 +53,10 @@ app.UseStaticFiles();
 app.UseRouting();
 
 app.UseAuthorization();
+
+//for session
+app.UseSession();
+
 
 app.MapControllerRoute(
     name: "default",

@@ -25,12 +25,50 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Employee" asp-action="Index">Employee Details</a>
-                        </li>
-                        <li class="nav-item">
+                        @if(!string.IsNullOrEmpty(HttpContextAccessor.HttpContext.Session.GetString("Name")))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Employee" asp-action="Index">Employee Details</a>
+                            </li>
+                            @* <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Student" asp-action="Index">Student Details</a>
+                        </li> *@
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Category" asp-action="Index">Category</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Product" asp-action="Index">Product</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Regitration" asp-action="Create">Registration</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Regitration" asp-action="Login">Login</a>
+                            </li>
+                        }
+                    </ul>
+
+                    <ul class="navbar-nav flex-grow-1 ml-auto">
+                        @if (string.IsNullOrEmpty(HttpContextAccessor.HttpContext.Session.GetString("Name")))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Regitration" asp-action="Create">Registration</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Regitration" asp-action="Login">Login</a>
+                            </li>
+                        }
+                        @if (!string.IsNullOrEmpty(HttpContextAccessor.HttpContext.Session.GetString("Name")))
+                        {
+                        <li class="nav-item">
+                            <a class="nav-link text-dark">
+                                Welcome  @HttpContextAccessor.HttpContext.Session.GetString("Name")
+                            </a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Regitration" asp-action="Logout">Logout</a>
+                        </li>
+                        }
                     </ul>
                 </div>
             </div>

@@ -1,0 +1,60 @@
+﻿@model DIPatternDemo.Models.Product
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>Product</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+           @*  <div class="form-group">
+                <label asp-for="Productid" class="control-label"></label>
+                <input asp-for="Productid" class="form-control" />
+                <span asp-validation-for="Productid" class="text-danger"></span>
+            </div> *@
+            <div class="form-group mb-3">
+                <label asp-for="Productname" class="control-label"></label>
+                <input asp-for="Productname" class="form-control" />
+                <span asp-validation-for="Productname" class="text-danger"></span>
+            </div>
+            <div class="form-group mb-3">
+                <label asp-for="Price" class="control-label"></label>
+                <input asp-for="Price" class="form-control" />
+                <span asp-validation-for="Price" class="text-danger"></span>
+            </div>
+            <div class="form-group mb-3">
+                <label class="control-label">Select Category</label>
+                <select class="form-control" asp-for="Categoryid" asp-items="@(new SelectList(ViewBag.Categories,"Categoryid","Categoryname"))"></select>
+                <span asp-validation-for="Categoryid" class="text-danger"></span>
+            </div>
+            <div class="form-group mb-3">
+                <label asp-for="ImageUrl" class="control-label"></label>
+                <input type="file" class="form-control" name="file" />
+                <span asp-validation-for="ImageUrl" class="text-danger"></span>
+            </div>
+            @* <div class="form-group">
+                <label asp-for="Categoryname" class="control-label"></label>
+                <input asp-for="Categoryname" class="form-control" />
+                <span asp-validation-for="Categoryname" class="text-danger"></span>
+            </div> *@
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary"/>
+            </div>
+        </form>
+    </div>
+</div>
+<p style="color:red">
+    @ViewBag.Error
+</p>
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
